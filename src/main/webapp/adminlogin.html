@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Welcome</title>
+    <link rel="stylesheet" href="layui/css/layui.css">
+    <link rel="stylesheet" href="css/background.css">
+    <link rel="shortcut icon" type="image/x-icon" href="icon/hsj.ico">
+    <script src="js/jquery-3.6.0.min.js"></script>
+</head>
+<body style="background-image: url(img/wallpaper.jpg)">
+    <div class="main">
+        <div class="welcome">
+           <p style="height: 40px;letter-spacing: 2px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;欢迎使用此活动区域预定系统<!--<img src="icon/hsj.png">--></p>
+        </div>
+        <div class="log">
+               &nbsp;&nbsp; 管理员登录
+        </div>
+        <form id="loginForm" >
+            <div class="div1">
+                <table style="width: 100%;" >
+                    <tr style="height: 40px">
+                        <td class="title1">ID</td>
+                        <td>
+                            <input type="text" name="adminid" id="adminid" placeholder="请输入ID">
+                            <span id="illegalNumber" style="font-size: 10px;color: red"> </span>
+                        </td>
+                    </tr>
+                    <tr style="height: 10px"></tr>
+                    <tr>
+                        <td class="title2">密 码
+                        </td>
+                        <td>
+                            <input type="password" name="password" id="password" placeholder="请输入密码">
+                            <span id="illegalPassword" style="font-size: x-small;color: red"></span>
+                        </td>
+                    </tr>
+                    <tr style="height:10px"></tr>
+                    <tr>
+                        <td class="title1">验证码</td>
+                        <td>
+                            <input type="text" name="checkcode" id="checkcode" style="width: 80px">
+                            <span style="font-size: x-small"><img src="checkCodeServlet" id="checkcodeimg">&nbsp;看不清？点图片</span>
+                            <span id="illegalCheckcode" style="font-size: x-small;color: red"></span>
+                        </td>
+                    </tr>
+                    <tr style="height:20px"></tr>
+                </table>
+            </div>
+            <div class="div2">
+                <div style="padding-left: 165px">
+                    <button id="btn_sub" class="layui-btn layui-btn-sm" type="button">登录</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <script>
+        $(function () {
+
+            $("#btn_sub").click(function () {
+                if ($("#illegalNumber").html()!=" "||$("#illegalPassword").html()!=" "||$("#illegalCheckcode").html()!=" "){
+                    alert("输入有误,请重试");
+                    window.location.reload();
+                }else {
+                    // 调用JQuery中的 .ajax()方法【url表示传递数据到哪里的地址、type表示传递方式的选择、data表示传递的参数、success和error表示回调函数】
+                    $.ajax({
+                        url:"adminLoginServlet",// 替换掉form表单中的action属性值
+                        type:"POST",//替换掉form表单中的method属性值
+
+                        // serialize()：是可以将整个表单的数据转成URL的字符串格式{注：意味着将整个表单进行了提交、不再一个参数一个参数提交了}
+                        data: $("#loginForm").serialize(),//serialize()方法是将整个表单进行了序列化操作
+                        success:function (data) {// 成功时自动调取的回调函数
+                            if(data.flag == true){
+                                window.open('HomepageForAdmin.html','_self');
+                            }else if (data.flag==false){
+                                alert(data.errorMsg+" 请重新输入并尝试登录");
+                                window.location.reload();
+                            }else {
+                                alert("50001,服务器端哪儿写错了！！");
+                            }
+                        },
+                        error:function (data) {// 失败时自动调取的回调函数
+                            alert("F**K!!!!");
+                        }
+                    });
+                }
+
+            });
+
+            $("#checkcodeimg").click(function () {
+               this.src="checkCodeServlet?time="+new Date().getTime();
+            })
+            $("#signUp").click(function () {
+                window.location.href="regist.html";
+            })
+
+            //以下是对输入框中内容的正则检验
+            $("#adminid").blur(function () {
+                let adminid = $("#adminid").val();
+                let illegalnumber = $("#illegalNumber");
+                let reg = /^[0-9]{4,11}$/;
+                let test = reg.test(adminid);
+                if(test){
+                    illegalnumber.html(" ");
+                }else {
+                    illegalnumber.html("长度有误,仅填数字");
+                }
+            })
+
+            $("#password").blur(function () {
+                let password = $("#password").val();
+                let illegalpassword = $("#illegalPassword");
+                let reg = /^[0-9a-zA-Z]{4,16}$/;
+                let test = reg.test(password);
+                if(test){
+                    illegalpassword.html(" ");
+                }else {
+                    illegalpassword.html("需4-16位数字+字母");
+                }
+            })
+
+            $("#checkcode").blur(function () {
+                let checkcode = $("#checkcode").val();
+                let illegalcheckcode = $("#illegalCheckcode");
+                let reg = /^[0-9a-zA-Z]{4}$/;
+                let test = reg.test(checkcode);
+                if(test){
+                    illegalcheckcode.html(" ");
+                }else {
+                    illegalcheckcode.html("长度有误");
+                }
+            })
+        })
+
+    </script>
+</body>
+</html>

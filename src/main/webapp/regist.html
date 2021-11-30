@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Registration</title>
+    <link rel="stylesheet" href="layui/css/layui.css">
+    <link rel="stylesheet" href="css/background.css">
+    <link rel="shortcut icon" type="image/x-icon" href="icon/hsj.ico">
+    <script src="js/jquery-3.6.0.min.js"></script>
+</head>
+<body style="background-image: url(img/registerBackground.jpg)">
+    <div class="main-register">
+        <div class="title-register">
+            <p style="height: 40px;letter-spacing: 4px">&nbsp;&nbsp;旅途,从此开始<!--<img src="icon/hsj.png">--></p>
+        </div>
+
+        <div class="theme-register" style="padding-top: 0px">
+            &nbsp;注册
+        </div>
+
+        <form id="registerForm">
+            <div class="div1-register">
+                <table style="width: 100%">
+                    <tr style="height: 3px"></tr>
+                    <tr  style="height: 40px">
+                        <td class="td-name-register">学号&nbsp;</td>
+                        <td>
+                            <input type="text" name="studentnumber" id="studentnumber" placeholder="请输入学号">
+                            <span id="illegalNumber" style="font-size: 10px;color: red"> </span>
+                        </td>
+                    </tr>
+
+                    <tr style="height: 10px"></tr>
+                    <tr  style="height: 40px">
+                        <td class="td-name-register">真实姓名&nbsp;</td>
+                        <td>
+                            <input type="text" name="username" id="username" placeholder="请输入真实姓名">
+                            <span id="illegalName" style="font-size: 10px;color: red"> </span>
+                        </td>
+                    </tr>
+
+                    <tr style="height: 10px"></tr>
+                    <tr  style="height: 40px">
+                        <td class="td-name-register">密码&nbsp;</td>
+                        <td>
+                            <input type="password" name="password" id="password" placeholder="请输入密码">
+                            <span id="illegalPassword" style="font-size: x-small;color: red"></span>
+                        </td>
+                    </tr>
+
+                    <tr style="height: 10px"></tr>
+                    <tr  style="height: 40px">
+                        <td class="td-name-register">再次输入密码&nbsp;</td>
+                        <td>
+                            <input type="password" name="passwordVerify"  id="passwordVerify" placeholder="请再次输入密码">
+                            <span id="checkPassword" style="font-size: x-small;color: red"></span>
+                        </td>
+                    </tr>
+
+                    <tr style="height: 10px"></tr>
+                    <tr  style="height: 40px">
+                        <td class="td-name-register">邮箱&nbsp;</td>
+                        <td>
+                            <input type="email" name="email" id="email" placeholder="请输入注册邮箱">
+                        </td>
+                    </tr>
+
+                    <tr style="height:10px"></tr>
+                    <tr>
+                        <td class="td-name-register">验证码&nbsp;</td>
+                        <td>
+                            <input type="text" name="checkcode" id="checkcode" style="width: 60px">
+                            <span style="font-size: x-small"><img src="checkCodeServlet" id="checkcodeimg">看不清？点图片</span>
+                            <span id="illegalCheckcode" style="font-size: x-small;color: red"></span>
+                        </td>
+                    </tr>
+                    <tr style="height:20px"></tr>
+                </table>
+            </div>
+
+            <div class="div2-register">
+                <div style="padding-left: 156px">
+                    <button id="btn_sub" class="layui-btn" type="button">注册</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        $(function () {
+            $("#btn_sub").click(function () {
+                /*这里表示只要表单里的正则检验有一项不通过，便无法提交表单（注册邮箱除外，会在服务器端校验第二次）*/
+                if ($("#illegalNumber").html()!=" "||
+                    $("#illegalPassword").html()!=" "||
+                    $("#illegalCheckcode").html()!=" "||
+                    $("#illegalName").html()!=" "||
+                    $("#checkPassword").html()!=" "){
+                    alert("输入有误,请重试");
+                    window.location.reload();
+                }else {
+                    alert("等等");
+                    $.ajax({
+                        url:"registUserServlet",// 替换掉form表单中的action属性值
+                        type:"POST",//替换掉form表单中的method属性值
+
+                        // serialize()：是可以将整个表单的数据转成URL的字符串格式{注：意味着将整个表单进行了提交、不再一个参数一个参数提交了}
+                        data: $("#registerForm").serialize(),//serialize()方法是将整个表单进行了序列化操作
+                        success:function (data) {// 成功时自动调取的回调函数
+                            if(data.flag == true){
+                                alert("注册成功，请登陆您的注册邮箱激活帐户");
+                            }else if (data.flag==false){
+                                alert(data.errorMsg+" 请重新输入并尝试注册");
+                                window.location.reload();
+                            }else {
+                                alert("50001,尼玛的服务器端哪儿写错了！！");
+                            }
+                        },
+                        error:function (data) {// 失败时自动调取的回调函数
+                            alert("FUCK!!!!");
+                        }
+                    });
+                }
+            })
+
+            $("#checkcodeimg").click(function () {
+                this.src="checkCodeServlet?time="+new Date().getTime();
+            })
+
+            /*下面是正则校验的东西*/
+            $("#studentnumber").blur(function () {
+                let studentnumber = $("#studentnumber").val();
+                let illegalnumber = $("#illegalNumber");
+                let reg = /^[0-9]{4,11}$/;
+                let test = reg.test(studentnumber);
+                if(test){
+                    illegalnumber.html(" ");
+                }else {
+                    illegalnumber.html("仅填4-11位数字!");
+                }
+            })
+
+            $("#username").blur(function () {
+                let username = $("#username").val();
+                let illegalname = $("#illegalName");
+                let reg = /^[\u4E00-\u9FA5A-Za-z0-9]{2,20}$/;
+                let test = reg.test(username);
+                if(test){
+                    illegalname.html(" ");
+                }else {
+                    illegalname.html("名字长度非法");
+                }
+            })
+
+            $("#password").blur(function () {
+                let password = $("#password").val();
+                let illegalpassword = $("#illegalPassword");
+                let reg = /^[0-9a-zA-Z]{4,16}$/;
+                let test = reg.test(password);
+                if(test){
+                    illegalpassword.html(" ");
+                }else {
+                    illegalpassword.html("需4-16位数字+字母");
+                }
+            })
+
+            // 这里写验证两次密码填写是否一致的东西，顺便检查下名字非法的提示有没有问题
+            $("#passwordVerify").blur(function () {
+                let password = $("#password").val();
+                let passwordVerify = $("#passwordVerify").val();
+                let checkpassword = $("#checkPassword");
+                if (password==passwordVerify){
+                    checkpassword.html(" ");
+                }else {
+                    checkpassword.html("两次输入不一致")
+                }
+            })
+
+            //这里给邮箱做个动态校验，检查邮箱是否已经被注册
+            $("#email").blur(function () {
+                let email = $("#email").val();
+                let checkemail = $("#checkEmail");
+                $.ajax({
+                    url:"emailCheckServlet",// 替换掉form表单中的action属性值
+                    type:"POST",//替换掉form表单中的method属性值
+
+                    // serialize()：是可以将整个表单的数据转成URL的字符串格式{注：意味着将整个表单进行了提交、不再一个参数一个参数提交了}
+                    data: {email:email},
+                    success:function (data) {// 成功时自动调取的回调函数
+                        if(data.flag == true){
+
+                        }else if (data.flag==false){
+                            alert(data.errorMsg);
+                        }else {
+                            alert("50001,尼玛的服务器端哪儿写错了！！");
+                        }
+                    },
+                    error:function (data) {// 失败时自动调取的回调函数
+                        alert("F**K!!!!");
+                    }
+                });
+            })
+
+            $("#checkcode").blur(function () {
+                let checkcode = $("#checkcode").val();
+                let illegalcheckcode = $("#illegalCheckcode");
+                let reg = /^[0-9a-zA-Z]{4}$/;
+                let test = reg.test(checkcode);
+                if(test){
+                    illegalcheckcode.html(" ");
+                }else {
+                    illegalcheckcode.html("长度有误");
+                }
+            })
+        })
+
+    </script>
+</body>
+</html>

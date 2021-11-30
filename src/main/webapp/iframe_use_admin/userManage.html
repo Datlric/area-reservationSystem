@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>userManage</title>
+    <link href="css/iframe.css" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <script src="js/jquery-3.6.0.min.js" type="text/javascript"></script>
+    <script src="js/bootstrap.min.js" type="text/javascript"></script>
+
+</head>
+<body>
+<div class="container" id="container" style="margin-left: 20%">
+    <div class="page-header">
+        <h1>用户管理</h1>
+    </div>
+
+    <div class="panel panel-primary" style="width: 60%">
+        <div class="panel-heading">
+            <h3 class="panel-title">请输入用户学号以进行管理</h3>
+        </div>
+        <div class="panel-body">
+            <div class="form-group" style="width: 75%;">
+                <label for="studentNumber">学号</label>
+                <input type="text" class="form-control" id="studentNumber" name="studentNumber" placeholder="请输入用户学号">
+            </div>
+            <div class="form-group">
+                <button type="button" class="btn btn-success" id="subBtn">确认</button>
+            </div>
+
+            <div id="showInfoFrame">
+                <table class="table">
+                    <thead>
+                    <th>用户学号</th>
+                    <th>姓名</th>
+                    <th>密码</th>
+                    <th>邮箱</th>
+                    <th>是否锁定</th>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td id="studentNumberDisplay"></td>
+                        <td id="nameDisplay"></td>
+                        <td id="passwordDisplay"></td>
+                        <td id="emailDisplay"></td>
+                        <td id="isLockedDisplay"></td>
+                    </tr>
+                    </tbody>
+                </table>
+                <p>
+                    <button type="button" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="top"
+                            title="用户密码将重置为1234" id="resetUserPassword">重置密码
+                    </button> &nbsp;
+                    <button type="button" class="btn btn-warning btn-sm" data-toggle="tooltip" data-placement="top"
+                            title="用户状态将设为’locked‘" id="lockUser">禁用用户
+                    </button> &nbsp;
+                    <button type="button" class="btn btn-success btn-sm" data-toggle="tooltip" data-placement="top"
+                            title="用户状态将设为’no‘" id="unlockUser">解锁用户
+                    </button> &nbsp;
+                    <button type="button" class="btn btn-danger  btn-sm" data-toggle="tooltip" data-placement="top"
+                            title="用户将被彻底删除" id="deleteUser">删除用户
+                    </button> &nbsp;
+                </p>
+            </div>
+        </div>
+
+        <div class="panel-footer" id="info" style="color: red">
+        </div>
+    </div>
+
+
+</div>
+
+<script>
+    window.onload = function () {
+        let studentNumberDisplay = $("#studentNumberDisplay");
+        let nameDisplay = $("#nameDisplay");
+        let passwordDisplay = $("#passwordDisplay");
+        let emailDisplay = $("#emailDisplay");
+        let isLockedDisplay = $("#isLockedDisplay");
+        $("#subBtn").click(function () {
+            let studentNumber = $("#studentNumber").val();
+            if (studentNumber.length >= 11) {
+                alert("学号长度不正确，请重新输入");
+                location.reload();
+            }
+            $.ajax({
+                url: "/race2/userManageServlet",
+                type: "POST",
+                data: {id: "admin", flag: true, method: "getUserInfo", studentNumber: studentNumber},
+                success: function (data) {// 成功时自动调取的回调函数
+                    if (data.flag == true) {
+                        let userInfo = data.data;
+                        studentNumberDisplay.html(userInfo.studentnumber);
+                        nameDisplay.html(userInfo.username);
+                        passwordDisplay.html(userInfo.password);
+                        emailDisplay.html(userInfo.email);
+                        isLockedDisplay.html(userInfo.islocked);
+                        $("#info").html(" ");
+                    } else {
+                        $("#info").html(data.errorMsg);
+                        studentNumberDisplay.html("");
+                        nameDisplay.html("");
+                        passwordDisplay.html("");
+                        emailDisplay.html("");
+                        isLockedDisplay.html("");
+                    }
+                },
+                error: function (data) {// 失败时自动调取的回调函数
+                    alert("提交失败");
+                }
+            });
+        })
+    }
+
+    $("#resetUserPassword").click(function () {
+        $.ajax({
+            url: "/race2/userManageServlet",
+            type: "POST",
+            data: {id: "admin", flag: true, method: "resetUserPassword", studentNumber: $("#studentNumberDisplay").html()},
+            success: function (data) {// 成功时自动调取的回调函数
+                if (data.flag == true) {
+                    alert("重置成功！");
+                    $("#info").html("");
+                } else {
+                    $("#info").html(data.errorMsg);
+                }
+            },
+            error: function (data) {// 失败时自动调取的回调函数
+                alert("提交失败");
+            }
+        });
+    })
+
+    $("#lockUser").click(function () {
+        $.ajax({
+            url: "/race2/userManageServlet",
+            type: "POST",
+            data: {id: "admin", flag: true, method: "lockUser", studentNumber: $("#studentNumberDisplay").html()},
+            success: function (data) {// 成功时自动调取的回调函数
+                if (data.flag == true) {
+                    alert("锁定用户成功！");
+                    $("#info").html("");
+                } else {
+                    $("#info").html(data.errorMsg);
+                }
+            },
+            error: function (data) {// 失败时自动调取的回调函数
+                alert("提交失败");
+            }
+        });
+    })
+
+    $("#unlockUser").click(function () {
+        $.ajax({
+            url: "/race2/userManageServlet",
+            type: "POST",
+            data: {id: "admin", flag: true, method: "unlockUser", studentNumber: $("#studentNumberDisplay").html()},
+            success: function (data) {// 成功时自动调取的回调函数
+                if (data.flag == true) {
+                    alert("解锁用户成功！");
+                    $("#info").html("");
+                } else {
+                    $("#info").html(data.errorMsg);
+                }
+            },
+            error: function (data) {// 失败时自动调取的回调函数
+                alert("提交失败");
+            }
+        });
+    })
+
+    $("#deleteUser").click(function () {
+        $.ajax({
+            url: "/race2/userManageServlet",
+            type: "POST",
+            data: {id: "admin", flag: true, method: "deleteUser", studentNumber: $("#studentNumberDisplay").html()},
+            success: function (data) {// 成功时自动调取的回调函数
+                if (data.flag == true) {
+                    alert("删除用户成功！");
+                    $("#info").html("");
+                } else {
+                    $("#info").html(data.errorMsg);
+                }
+            },
+            error: function (data) {// 失败时自动调取的回调函数
+                alert("提交失败");
+            }
+        });
+    })
+
+</script>
+</body>
+</html>

@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>areaManage</title>
+    <link href="css/iframe.css" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <script src="js/jquery-3.6.0.min.js" type="text/javascript"></script>
+    <script src="js/bootstrap.min.js" type="text/javascript"></script>
+
+    <style>
+        td, th {
+            text-align: center;
+            vertical-align: middle;
+        }
+
+        tr {
+            background-color: white;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="page-header">
+        <h1>区域管理 &nbsp;<small>
+            <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#addNewAreaModal">添加新区域</button>
+        </small></h1>
+
+    </div>
+    <h3 style="text-align: center;margin-top:25px;margin-bottom:20px;font-weight: bold;letter-spacing: 2px">
+        活动区域信息列表</h3>
+    <table border="1" class="table table-bordered table-hover">
+        <thead>
+        <tr style="background-color: rgba(57,61,73,0.8);color: white">
+            <th>操作</th>
+            <th>区域编号</th>
+            <th>区域名称</th>
+            <th>最大容量</th>
+            <th>具体位置</th>
+            <th>近期是否有空闲</th>
+        </tr>
+        </thead>
+
+        <tbody id="infoTbody">
+        <tr>
+            <!-- <td style="width: 20%">
+                 <a class="btn btn-success btn-sm" data-toggle="modal" data-target="#resetAreaInfoModal"
+                    id="resetBtn">修改</a>&nbsp;
+                 <a class="btn btn-danger btn-sm" id="deleteBtn">删除</a>&nbsp;
+                 <a class="btn btn-warning btn-sm">锁定区域</a>
+             </td>
+             <td>B4</td>
+             <td>曲江大学生活动中心</td>
+             <td>1000</td>
+             <td>曲江主干道西侧</td>
+             <td style="color: green">是</td>-->
+        </tr>
+        </tbody>
+
+    </table>
+
+    <div>
+        <!-- Modal -->
+        <div class="modal fade" id="resetAreaInfoModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">请输入修改信息</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form id="resetForm">
+                            <div class="form-group">
+                                <label for="areaId_form">区域编号</label>
+                                <input type="text" class="form-control disabled" placeholder="请输入新的区域编号"
+                                       name="areaId" id="areaId_form" value="">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="areaName_form">区域名称</label>
+                                <input type="text" class="form-control disabled" placeholder="请输入新的区域名称"
+                                       id="areaName_form"
+                                       name="areaName" value="">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="capacity_form">最大容量</label>
+                                <input type="number" class="form-control" id="capacity_form" placeholder=" "
+                                       name="capacity">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="location_form">具体位置</label>
+                                <input type="text" class="form-control" id="location_form" name="location">
+                            </div>
+
+                            <div class="form-group" style="width: 50%">
+                                <label for="isAvailable_form">近期是否空闲</label>
+                                <select class="form-control" id="isAvailable_form" name="isAvailable">
+                                    <option>是</option>
+                                    <option>否</option>
+                                </select>
+                            </div>
+
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                        <button type="button" class="btn btn-success" id="subResBtn">提交</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>
+        <!-- Modal -->
+        <div class="modal fade" id="addNewAreaModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title">请输入新区域的信息</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form id="newForm">
+                            <div class="form-group">
+                                <label for="areaId_new">区域编号</label>
+                                <input type="text" class="form-control disabled" placeholder="请输入新的区域编号"
+                                       name="areaId" id="areaId_new" value="">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="areaName_new">区域名称</label>
+                                <input type="text" class="form-control disabled" placeholder="请输入新的区域名称"
+                                       id="areaName_new" name="areaName" value="">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="capacity_new">最大容量</label>
+                                <input type="number" class="form-control" id="capacity_new" placeholder=" "
+                                       name="capacity">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="location_new">具体位置</label>
+                                <input type="text" class="form-control" id="location_new" name="location">
+                            </div>
+
+                            <div class="form-group" style="width: 50%">
+                                <label for="isAvailable_new">近期是否空闲</label>
+                                <select class="form-control" id="isAvailable_new" name="isAvailable">
+                                    <option>是</option>
+                                    <option>否</option>
+                                </select>
+                            </div>
+
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                        <button type="button" class="btn btn-success" id="subAddBtn">提交</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    window.onload = function () {
+        var infoTbody = $("#infoTbody");
+        $.ajax({
+            url: "/race2/getAllAreaServlet",
+            type: "POST",
+            data: {id: "admin", flag: true},
+            success: function (data) {// 成功时自动调取的回调函数
+                if (data.flag == true) {
+                    let info = data.data;
+                    for (let i = 0; i < info.length; i++) {
+                        let trNew = $("<tr></tr>").attr({"id": "tr" + i});
+                        if (info[i]["isAvailable"] == "是") {
+                            trNew.append($("<td style=\"width: 20%\">" +
+                                "<a class=\"btn btn-success btn-sm\" data-toggle=\"modal\" data-target=\"#resetAreaInfoModal\" id=\"resetBtn\" onclick='changeAreaInfo(" + i + ")'>修改</a>&nbsp;&nbsp;" +
+                                "<a class=\"btn btn-danger btn-sm\" id=\"deleteBtn\" onclick='delArea(" + i + ")'>删除</a>&nbsp;&nbsp;" +
+                                "<a class=\"btn btn-warning btn-sm\" id='setAreaNBtn' onclick='setAreaN(" + i + ")'>锁定区域</a>" +
+                                "</td>"));
+                        } else {
+                            trNew.append($("<td  style=\"width: 20%\">" +
+                                "<a class=\"btn btn-success btn-sm\" data-toggle=\"modal\" data-target=\"#resetAreaInfoModal\" id=\"resetBtn\" onclick='changeAreaInfo(" + i + ")'>修改</a>&nbsp;&nbsp;" +
+                                "<a class=\"btn btn-danger btn-sm\" id=\"deleteBtn\" onclick='delArea(" + i + ")'>删除</a>&nbsp;&nbsp;" +
+                                "<a class=\"btn btn-info btn-sm\" id='setAreaNBtn' onclick='setAreaY(" + i + ")'>解锁区域</a>" +
+                                "</td>"));
+                        }
+                        for (var key in info[i]) {
+                            if (info[i][key] == "是") {
+                                trNew.append($("<td style='color: green;font-weight: bold'></td>").attr({"id": key}).html(info[i][key]));
+                            } else if (info[i][key] == "否") {
+                                trNew.append($("<td style='color: red;font-weight: bold'></td>").attr({"id": key}).html(info[i][key]));
+                            } else {
+                                trNew.append($("<td></td>").attr({"id": key}).html(info[i][key]));
+                            }
+
+                        }
+                        infoTbody.append(trNew);
+                    }
+                } else {
+                    alert("错误：" + data.errorMsg);
+                }
+            },
+            error: function (data) {// 失败时自动调取的回调函数
+                alert("获取区域信息失败!");
+            }
+        });
+
+
+    }
+
+    //todo 11.13 22:32 明天有空写对每一条数据的具体操作
+
+    //修改区域
+    function changeAreaInfo(trI) {
+        //tr id属性字符串拼接
+        let trId = "tr" + trI;
+        //根据id，获取点击按钮所在行元素
+        let controlTr = $("#" + trId + "");
+        let TdAreaId = controlTr.children("#areaId").html();
+
+
+        alert(TdAreaId + " changeAreaInfo");
+    }
+
+
+    //删除区域
+    function delArea(trI) {
+        //tr id属性字符串拼接
+        let trId = "tr" + trI;
+        //根据id，获取点击按钮所在行元素
+        let controlTr = $("#" + trId + "");
+        let TdAreaId = controlTr.children("#areaId").html();
+
+        /*alert(TdAreaId + " delArea");*/
+        let confirm1 = confirm("真的要删除区域："+TdAreaId+"吗？");
+        if (confirm1){
+            $.ajax({
+                url: "/race2/areaManageServlet",
+                type: "POST",
+                data: {id: "admin", flag: true, method: "delArea", areaId: TdAreaId},
+                success: function (data) {// 成功时自动调取的回调函数
+                    if (data.flag == true) {
+                        alert("操作成功！");
+                        location.reload();
+                    } else {
+                        alert("错误：" + data.errorMsg);
+                    }
+                },
+                error: function (data) {// 失败时自动调取的回调函数
+                    alert("操作失败");
+                }
+            });
+
+        }
+    }
+
+    //锁定区域
+    function setAreaN(trI) {
+        //tr id属性字符串拼接
+        let trId = "tr" + trI;
+        //根据id，获取点击按钮所在行元素
+        let controlTr = $("#" + trId + "");
+        let TdAreaId = controlTr.children("#areaId").html();
+
+        alert(TdAreaId + " setAreaY");
+
+    }
+
+    //解锁区域
+    function setAreaY(trI) {
+        //tr id属性字符串拼接
+        let trId = "tr" + trI;
+        //根据id，获取点击按钮所在行元素
+        let controlTr = $("#" + trId + "");
+        let TdAreaId = controlTr.children("#areaId").html();
+
+        alert(TdAreaId + " setAreaN");
+
+    }
+
+</script>
+</body>
+</html>

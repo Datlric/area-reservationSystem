@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>startReserve</title>
+    <link href="css/iframe.css" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <script src="js/jquery-3.6.0.min.js" type="text/javascript"></script>
+    <script src="js/bootstrap.min.js" type="text/javascript"></script>
+    <style>
+        td, th {
+            text-align: center;
+            vertical-align: middle;
+        }
+
+        tr {
+            background-color: white;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h3 style="text-align: center;margin-top:25px;margin-bottom:20px;font-weight: bold;letter-spacing: 2px">
+        活动区域信息列表</h3>
+
+    <button type="button" class="btn btn-primary" style="margin-bottom: 5px" data-toggle="modal"
+            data-target="#arrangementModal" id="viewArrangeBtn">查看区域日程安排
+    </button>
+
+    <table border="1" class="table table-bordered table-hover">
+        <thead>
+        <tr style="background-color: rgba(57,61,73,0.8);color: white">
+            <th>操作</th>
+            <th>区域编号</th>
+            <th>区域名称</th>
+            <th>最大容量</th>
+            <th>具体位置</th>
+            <th>近期是否有空闲</th>
+        </tr>
+        </thead>
+
+        <tbody id="infoTbody">
+        <!--<tr>
+            <td>
+                <a class="btn btn-success btn-sm" data-toggle="modal" data-target="#reserveModal" id="confirmBtn">选定</a>
+            </td>
+        </tr>-->
+        </tbody>
+
+    </table>
+    <!-- 预定表填写处-->
+    <div>
+        <!-- Modal -->
+        <div class="modal fade" id="reserveModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">请填写预约单</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form id="reserveForm">
+                            <div class="form-group">
+                                <label for="studentNumber_form">申请用户学号<p style="font-size: 10px;color: red">
+                                    仅限填写当前登录者本人学号</p></label>
+                                <input type="text" class="form-control disabled" placeholder="3190561018"
+                                       name="studentNumber" id="studentNumber_form" value="">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="areaId_form">区域id</label>
+                                <input type="text" class="form-control disabled" placeholder="B3" id="areaId_form"
+                                       name="areaId" value="">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="areaName_form">区域名称</label>
+                                <input type="text" class="form-control" id="areaName_form" placeholder="大活"
+                                       name="areaName">
+                            </div>
+
+                            <div class="form-group" style="width: 200px">
+                                <label for="startTime_form">活动开始时间</label>
+                                <input type="date" class="form-control" id="startTime_form" name="startTime">
+                            </div>
+
+                            <div class="form-group" style="width: 200px">
+                                <label for="endTime_form">活动结束时间</label>
+                                <input type="date" class="form-control" id="endTime_form" name="endTime">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="reason_form">申请理由</label>
+                                <textarea maxlength="70" class="form-control" rows="3" placeholder="70字以内简短说明"
+                                          id="reason_form" name="reason"></textarea>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                        <button type="button" class="btn btn-success" id="subResBtn">提交</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 查看区域日程安排-->
+    <div>
+        <!-- Modal -->
+        <div class="modal fade" id="arrangementModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title">查看区域安排</h4>
+                    </div>
+                    <div class="modal-body">
+                        <!--让用户选择区域名称及月份进行查看-->
+                        <div>
+                            <form class="form-inline" id="viewArrange_Form">
+                                <div class="form-group">
+                                    <select class="form-control" id="showAreaInfo_select">
+                                        <option disabled selected hidden>请选择区域</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <select class="form-control">
+                                        <option disabled selected hidden>时间(2021年)</option>
+                                        <option value="2021-1">一月</option>
+                                        <option value="2021-2">二月</option>
+                                        <option value="2021-3">三月</option>
+                                        <option value="2021-4">四月</option>
+                                        <option value="2021-5">五月</option>
+                                        <option value="2021-6">六月</option>
+                                        <option value="2021-7">七月</option>
+                                        <option value="2021-8">八月</option>
+                                        <option value="2021-9">九月</option>
+                                        <option value="2021-10">十月</option>
+                                        <option value="2021-11">十一月</option>
+                                        <option value="2021-12">十二月</option>
+                                    </select>
+                                </div>&nbsp;
+                                <button type="submit" class="btn btn-info">查询</button>
+                            </form>
+                            <br>
+                            <div class="panel panel-default">
+                                <div class="panel-body">
+                                    example
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                        <!-- <button type="button" class="btn btn-success" id="">提交</button>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    window.onload = function () {
+        var infoTbody = $("#infoTbody");
+        $.ajax({
+            url: "/race2/getAllAreaServlet",
+            type: "POST",
+            data: {id: "user", flag: true},
+            success: function (data) {// 成功时自动调取的回调函数
+                if (data.flag == true) {
+                    let info = data.data;
+                    //todo 11.4 22:40 今天又写不动了。明天继续，完成核心部分的可用区域信息动态列表展示,看起来好像这里数据处理差不多了
+                    for (let i = 0; i < info.length; i++) {
+                        let trNew = $("<tr></tr>").attr({"id": "tr" + i});
+                        if (info[i]["isAvailable"] == "是") {
+                            trNew.append($("<td><a class=\"btn btn-success btn-sm\" data-toggle=\"modal\" data-target=\"#reserveModal\" title='选定'>选定</a></td>").attr({"onclick": "f(" + i + ")"}));
+                        } else {
+                            trNew.append($("<td><a class=\"btn btn-default btn-sm disabled\">选定</a></td>"));
+                        }
+                        for (var key in info[i]) {
+                            if (info[i][key] == "是") {
+                                trNew.append($("<td style='color: green;font-weight: bold'></td>").attr({"id": key}).html(info[i][key]));
+                            } else if (info[i][key] == "否") {
+                                trNew.append($("<td style='color: red ;font-weight: bold'></td>").attr({"id": key}).html(info[i][key]));
+                            } else {
+                                trNew.append($("<td></td>").attr({"id": key}).html(info[i][key]));
+                            }
+                        }
+                        infoTbody.append(trNew);
+                    }
+                } else {
+                    alert("错误：" + data.errorMsg);
+                }
+            },
+            error: function (data) {// 失败时自动调取的回调函数
+                alert("获取区域信息失败!");
+            }
+        });
+
+        $("#subResBtn").click(function () {
+            //进行对填写的活动开始结束时间及申请理由做校验，开始时间<结束时间，申请理由必须大于10个字
+            let startTimeCheck = $("#startTime_form").val();
+            let endTimeCheck = $("#endTime_form").val();
+            let reasonLength = $("#reason_form").val().length;
+
+            if (startTimeCheck <= endTimeCheck && reasonLength >= 10) {
+                //后端会对studentNumber做校验，如果不是当前登录用户的学号，会直接返回false及错误信息，且一个用户只能目前预约一个单子
+                $.ajax({
+                    url: "/race2/subReserveFormServlet",
+                    type: "POST",
+                    data: $("#reserveForm").serialize(),
+                    success: function (data) {// 成功时自动调取的回调函数
+                        if (data.flag == true) {
+                            alert("提交成功！等待审核" + "\n" + "您可以在‘已预约’中取消预约");
+                            location.reload();
+                        } else {
+                            alert("错误：" + data.errorMsg);
+                        }
+                    },
+                    error: function (data) {// 失败时自动调取的回调函数
+                        alert("提交失败!");
+                    }
+                });
+            } else if (startTimeCheck > endTimeCheck) {
+                alert("开始日期必须早于或等于结束日期！");
+            } else if (reasonLength <= 10) {
+                alert("申请理由必须大于10个字")
+            } else {
+                alert("提交错误！")
+            }
+        })
+
+        //当查看安排按钮点击时，向后端请求最新的区域信息
+        $("#viewArrangeBtn").click(function () {
+          /* $("#showAreaInfo_select").html("<option disabled selected hidden>请选择区域</option>");*/
+            //todo 11.20明天改这里重复出现数据的bug并写报告
+            $.ajax({
+                url: "/race2/getAllAreaServlet",
+                type: "POST",
+                data: {id: "user", flag: true},
+                success: function (data) {// 成功时自动调取的回调函数
+                    if (data.flag == true) {
+                        let info = data.data;
+                        for (let i = 0; i < info.length; i++) {
+                            let areaId = info[i]["areaId"];
+                            let areaName = info[i]["areaName"];
+                            let areaInf = areaId + " " + areaName;
+                            $("#showAreaInfo_select").append("<option value=' " + areaId + " '>" + areaInf + "</option>")
+                        }
+                    } else {
+                        alert("错误：" + data.errorMsg);
+                    }
+                },
+                error: function (data) {// 失败时自动调取的回调函数
+                    alert("加载区域列表失败!");
+                }
+            });
+        })
+
+        $("#arrangementModal").on('hidden.bs.modal',function () {
+            $("#showAreaInfo_select").find("option").remove();
+            $("#showAreaInfo_select").append(" <option disabled selected hidden>请选择区域</option>");
+        })
+
+
+    }
+
+    function f(trI) {
+        //tr id属性字符串拼接
+        let trId = "tr" + trI;
+        //根据id，获取点击按钮所在行元素
+        let controlTr = $("#" + trId + "");
+        let TdAreaId = controlTr.children("#areaId").html();
+        let TdAreaName = controlTr.children("#areaName").html();
+
+        //alert(TdAreaId+TdAreaName);
+        $("#areaId_form").attr({"placeholder": TdAreaId, "value": TdAreaId});
+        $("#areaName_form").attr({"placeholder": TdAreaName, "value": TdAreaName});
+
+        //在这里去获取当前登录用户的学号
+        $.ajax({
+            url: "/race2/getUserInfoServlet",
+            type: "POST",
+            data: {id: "user", flag: true},
+            success: function (data) {// 成功时自动调取的回调函数
+                if (data.flag == true) {
+                    let getStudentNumber = data.data.studentnumber;
+                    $("#studentNumber_form").attr({"placeholder": getStudentNumber, "value": getStudentNumber});
+                } else {
+                    alert("错误：" + data.errorMsg);
+                }
+            },
+            error: function (data) {// 失败时自动调取的回调函数
+                alert("获取当前用户学号失败!");
+            }
+        });
+    }
+
+</script>
+</body>
+</html>

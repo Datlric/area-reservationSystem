@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>HomepageForAdmin</title>
+    <link rel="stylesheet" href="layui/css/layui.css">
+    <script src="layui/layui.js"></script>
+</head>
+<body>
+<div class="layui-layout layui-layout-admin">
+    <div class="layui-header">
+        <div class="layui-logo" style="color: lightgreen" id="logoName">学生活动区域预约系统</div>
+        <!-- 头部区域（可配合layui已有的水平导航） -->
+        <ul class="layui-nav layui-layout-left">
+            <li class="layui-nav-item" id="userManage">
+                <a href="#">用户管理</a>
+            </li>
+            <li class="layui-nav-item" lay-unselect="">
+                <a href="javascript:;"><img src="icon/hsj.ico" class="layui-nav-img"><span id="nameDisplay">我</span></a>
+                <dl class="layui-nav-child">
+                    <dd id="adminCenter"><a href="javascript:;">管理员个人中心</a></dd>
+                    <dd id="adminLogOff"><a href="javascript:;">退出登录</a></dd>
+                </dl>
+            </li>
+        </ul>
+    </div>
+
+    <div class="layui-side layui-bg-black">
+        <div class="layui-side-scroll">
+            <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+            <ul class="layui-nav layui-nav-tree">
+                <li class="layui-nav-item layui-nav-itemed">
+                    <a class="" href="javascript:;">处理预约单</a>
+                    <dl class="layui-nav-child">
+                        <dd id="unDo"><a href="javascript:;">未处理</a></dd>
+                        <dd id="done"><a href="javascript:;">已处理</a></dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item">
+                    <a class="" href="javascript:;">活动区域分布</a>
+                    <dl class="layui-nav-child">
+                        <dd id="areaManage"><a href="javascript:;">区域管理</a></dd>
+                        <dd id="getQuJiangImg"><a href="javascript:;">曲江校区</a></dd>
+                        <dd id="getJinHuaImg"><a href="javascript:;">金花校区</a></dd>
+                    </dl>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+
+    <!--左侧操作显示区域-->
+    <div class="layui-body">
+        <form></form><!--只是用来提交数据的-->
+        <iframe frameborder="0" scrolling="no" style="width: 100%" src="iframe_use_admin/blank.html" id="iframe">
+        </iframe>
+    </div>
+
+    <script>
+        window.onload = function () {
+            //注意：导航 依赖 element 模块，否则无法进行功能性操作
+            layui.use('element', function () {
+                let element = layui.element;
+                let $ = layui.$;
+                <!--对nav里面各种元素的操作-->
+                /*$("#logoName").click(function () {
+                    open("https://bilibili.com")
+                })*/
+
+                let nameDisplay = $("#nameDisplay").html();
+                /*alert(nameDisplay);*/
+                $.ajax({
+                    url:"/race2/updateDisplayNameServlet",// 替换掉form表单中的action属性值
+                    type:"POST",//替换掉form表单中的method属性值
+
+                    // serialize()：是可以将整个表单的数据转成URL的字符串格式{注：意味着将整个表单进行了提交、不再一个参数一个参数提交了}
+                    data: {nameDisplay:nameDisplay,flag:true,id:"admin"},
+                    success:function (data) {// 成功时自动调取的回调函数
+                        if(data.flag == true){
+                            /*alert("success"+data.data);*/
+                            $("#nameDisplay").html(data.data);
+                        }else if (data.flag==false){
+                            alert("fail");
+                        }else {
+                            alert("50001,服务器端哪儿写错了！！");
+                        }
+                    },
+                    error:function (data) {// 失败时自动调取的回调函数
+                        alert("id获取失败...");
+                    }
+                });
+            });
+
+            layui.use(['form', 'jquery', 'layer'], function () {
+                let $ = layui.$
+                    , layer = layui.layer;
+
+                /*$("#logoName").click(function () {
+                    open("https://bilibili.com")
+                })*/
+                let iframe = $("#iframe");
+                let iframeheight = $(window).height();
+                console.log(iframeheight);
+                iframe.css("height", iframeheight);
+
+                $("#areaManage").click(function () {
+                    iframe.attr("src", "iframe_use_admin/areaManage.html");
+                })
+
+                $("#getQuJiangImg").click(function () {
+                    iframe.attr("src", "iframe_use_admin/QuJiangMap.html");
+                })
+
+                $("#getJinHuaImg").click(function () {
+                    iframe.attr("src", "iframe_use_admin/JinHuaMap.html");
+                })
+
+                $("#unDo").click(function () {
+                    iframe.attr("src", "iframe_use_admin/unprocessed.html");
+                })
+
+                $("#done").click(function () {
+                    iframe.attr("src", "iframe_use_admin/processed.html");
+                })
+
+
+                $("#userManage").click(function () {
+                    iframe.attr("src","iframe_use_admin/userManage.html")
+                })
+
+                $("#adminCenter").click(function () {
+                    iframe.attr("src","iframe_use_admin/adminCenter.html")
+                })
+
+                $("#adminLogOff").click(function () {
+                    window.open("http://localhost/race2/adminLogOffServlet","_self");
+                })
+
+            })
+        }
+    </script>
+</div>
+</body>
+</html>

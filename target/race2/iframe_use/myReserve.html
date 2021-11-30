@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>myReserve</title>
+    <link href="css/iframe.css" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <script src="js/jquery-3.6.0.min.js" type="text/javascript"></script>
+    <script src="js/bootstrap.min.js" type="text/javascript"></script>
+    <style>
+        td, th {
+            text-align: center;
+            vertical-align: middle;
+        }
+
+        tr {
+            background-color: white;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h3 style="text-align: center;margin-top:25px;margin-bottom:20px;font-weight: bold;letter-spacing: 2px">
+        我的预约</h3>
+    <table border="1" class="table table-bordered table-hover">
+        <thead>
+        <tr style="background-color: rgba(57,61,73,0.8);color: white">
+            <th>操作</th>
+            <th>预约单号</th>
+            <th>提交时间</th>
+            <th>活动开始时间</th>
+            <th>活动结束时间</th>
+            <th>申请理由</th>
+            <th>区域编号</th>
+            <th>申请者学号</th>
+            <th>是否通过</th>
+            <th>处理时间</th>
+        </tr>
+        </thead>
+
+        <tbody id="infoTBody">
+
+        </tbody>
+    </table>
+</div>
+
+<script>
+    $(function () {
+        var infoTBody = $("#infoTBody");
+        $.ajax({
+            url: "/race2/getUserReserveServlet",
+            type: "POST",
+            data: {id: "user", flag: true},
+            success: function (data) {// 成功时自动调取的回调函数
+                if (data.flag == true) {
+                    //{"flag":true,"data":{"applyFormId":"B4#3190561018#2021-11-07;10:36:15","subTime":"2021-11-07;10:36:15","startTime":"2021-11-11","endTime":"2021-11-12","reason":"一个简单的活动申请表测试，测试时间，2021-11-7","areaId":"B4","studentNumber":"3190561018","isPass":"n","passTime":null},"errorMsg":null}
+                    let info = data.data;
+
+                    if (info["isPass"] == "n") {
+                        info["isPass"] = "否";
+                    }else if (info["isPass"] == "y"){
+                        info["isPass"] = "是";
+                    }else if (info["isPass"] == "processing"){
+                        info["isPass"] = "处理中";
+                    }else {
+                        info["isPass"] = "error";
+                    }
+
+                    let trNew = $("<tr></tr>").attr({"id": "tr"});
+                    trNew.append($("<td><a class=\"btn btn-warning btn-sm \" onclick='cancelReserve()'>取消/注销预约</a>"));
+                    for (let key in info) {
+                        trNew.append($("<td style='font-size: 12px'></td>").attr({"id": key}).html(info[key]));
+                    }
+
+                    infoTBody.append(trNew);
+                } else {
+                    alert("错误：" + data.errorMsg);
+                }
+            },
+            error: function (data) {// 失败时自动调取的回调函数
+                alert("获取用户预定表失败!");
+            }
+        });
+
+    })
+
+    function cancelReserve() {
+        var confirm = window.confirm("确认要取消吗？");
+        if (confirm){
+            $.ajax({
+                url: "/race2/cancelUserReserveServlet",
+                type: "POST",
+                data: {id: "user", flag: true},
+                success: function (data) {// 成功时自动调取的回调函数
+                    if (data.flag == true) {
+                        alert("取消成功！");
+                        location.reload();
+                    } else {
+                        alert("错误：" + data.errorMsg);
+                    }
+                },
+                error: function (data) {// 失败时自动调取的回调函数
+                    alert("获取用户预定表失败!");
+                }
+            });
+        }
+    }
+</script>
+</body>
+</html>

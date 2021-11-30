@@ -1,0 +1,402 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ArtifactsWorkspaceSettings">
+    <artifacts-to-build>
+      <artifact name="race2:war exploded" />
+    </artifacts-to-build>
+  </component>
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="e0a89929-6382-467c-bc2a-d55376535833" name="默认变更列表" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="CSS File" />
+        <option value="FxmlFile" />
+        <option value="Interface" />
+        <option value="HTML File" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="jar://C:/JDK/JDK8/src.zip!/java/lang/String.java" root0="SKIP_INSPECTION" />
+  </component>
+  <component name="LogFilters">
+    <option name="FILTER_ERRORS" value="false" />
+    <option name="FILTER_WARNINGS" value="false" />
+    <option name="FILTER_INFO" value="true" />
+    <option name="FILTER_DEBUG" value="true" />
+    <option name="CUSTOM_FILTER" />
+  </component>
+  <component name="ProjectId" id="1zgOBtg1tQrORgw9pycqNlRa6WP" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="DatabaseDriversLRU" value="mysql" />
+    <property name="DefaultHtmlFileTemplate" value="HTML File" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="TODO_SCOPE" value="所有位置" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" />
+    <property name="list.type.of.created.stylesheet" value="CSS" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="project.structure.last.edited" value="Facet" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.20088889" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\IdeaProjects\race2\src\main\webapp\iframe_use_admin" />
+      <recent name="D:\IdeaProjects\race2\src\test\java" />
+      <recent name="D:\IdeaProjects\race2\src\main\webapp\iframe_use\js" />
+      <recent name="D:\IdeaProjects\race2\src\main\webapp\iframe_use" />
+      <recent name="D:\IdeaProjects\race2\src\main\webapp\img" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\IdeaProjects\race2\src\main\webapp\iframe_use\iframe_css" />
+      <recent name="D:\IdeaProjects\race2\src\main\webapp" />
+      <recent name="D:\IdeaProjects\race2\src\main\webapp\error" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="web.servlet" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Tomcat 服务器.Tomcat 8.5.70">
+    <configuration name="UserServiceTest.mailUtilsTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="race2" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="UserServiceTest" />
+      <option name="METHOD_NAME" value="mailUtilsTest" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="aaa.ASDI" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="race2" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="aaa" />
+      <option name="METHOD_NAME" value="ASDI" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="aaa.ASDI2" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="race2" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="aaa" />
+      <option name="METHOD_NAME" value="ASDI2" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="aaa.b" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="race2" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="test.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="test" />
+      <option name="MAIN_CLASS_NAME" value="test.aaa" />
+      <option name="METHOD_NAME" value="b" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="aaa.mailUtilTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="race2" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="test.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="test" />
+      <option name="MAIN_CLASS_NAME" value="test.aaa" />
+      <option name="METHOD_NAME" value="mailUtilTest" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Tomcat 8.5.70" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 8.5.70" ALTERNATIVE_JRE_ENABLED="false" nameIsGenerated="true">
+      <option name="OPEN_IN_BROWSER_URL" value="http://localhost:80/race2/index.jsp" />
+      <option name="UPDATING_POLICY" value="restart-server" />
+      <deployment>
+        <artifact name="race2:war exploded">
+          <settings>
+            <option name="CONTEXT_PATH" value="/race2" />
+          </settings>
+        </artifact>
+      </deployment>
+      <server-settings>
+        <option name="BASE_DIRECTORY_NAME" value="a1534231-7239-4784-bce6-eced4f4b23b9" />
+        <option name="HTTP_PORT" value="80" />
+      </server-settings>
+      <predefined_log_file enabled="true" id="Tomcat" />
+      <predefined_log_file enabled="true" id="Tomcat Catalina" />
+      <predefined_log_file id="Tomcat Manager" />
+      <predefined_log_file id="Tomcat Host Manager" />
+      <predefined_log_file id="Tomcat Localhost Access" />
+      <RunnerSettings RunnerId="Debug">
+        <option name="DEBUG_PORT" value="11749" />
+      </RunnerSettings>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Cover">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Debug">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Profile">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Run">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <method v="2">
+        <option name="Make" enabled="true" />
+        <option name="BuildArtifacts" enabled="true">
+          <artifact name="race2:war exploded" />
+        </option>
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="JUnit.UserServiceTest.mailUtilsTest" />
+      <item itemvalue="JUnit.aaa.ASDI" />
+      <item itemvalue="JUnit.aaa.ASDI2" />
+      <item itemvalue="JUnit.aaa.b" />
+      <item itemvalue="JUnit.aaa.mailUtilTest" />
+      <item itemvalue="Tomcat 服务器.Tomcat 8.5.70" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.aaa.mailUtilTest" />
+        <item itemvalue="JUnit.aaa.b" />
+        <item itemvalue="JUnit.UserServiceTest.mailUtilsTest" />
+        <item itemvalue="JUnit.aaa.ASDI2" />
+        <item itemvalue="JUnit.aaa.ASDI" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="应用程序级" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="默认任务">
+      <changelist id="e0a89929-6382-467c-bc2a-d55376535833" name="默认变更列表" comment="" />
+      <created>1634566134248</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1634566134248</updated>
+      <workItem from="1634566136166" duration="2705000" />
+      <workItem from="1634631507869" duration="4154000" />
+      <workItem from="1634638773789" duration="512000" />
+      <workItem from="1634647610482" duration="7502000" />
+      <workItem from="1634698488723" duration="3531000" />
+      <workItem from="1634728997294" duration="8491000" />
+      <workItem from="1634808691948" duration="3368000" />
+      <workItem from="1634817492542" duration="172000" />
+      <workItem from="1634817674016" duration="9114000" />
+      <workItem from="1634871507661" duration="3305000" />
+      <workItem from="1634898247525" duration="573000" />
+      <workItem from="1634899189953" duration="726000" />
+      <workItem from="1634904726082" duration="9852000" />
+      <workItem from="1634988325522" duration="1216000" />
+      <workItem from="1634989561464" duration="902000" />
+      <workItem from="1634990487785" duration="3130000" />
+      <workItem from="1635002662490" duration="2815000" />
+      <workItem from="1635087636085" duration="236000" />
+      <workItem from="1635150908523" duration="6884000" />
+      <workItem from="1635163527365" duration="9008000" />
+      <workItem from="1635235584962" duration="8757000" />
+      <workItem from="1635250008457" duration="2525000" />
+      <workItem from="1635252582432" duration="4855000" />
+      <workItem from="1635301392850" duration="5791000" />
+      <workItem from="1635326311194" duration="3459000" />
+      <workItem from="1635335344618" duration="170000" />
+      <workItem from="1635335548805" duration="10618000" />
+      <workItem from="1635408201090" duration="7551000" />
+      <workItem from="1635418193711" duration="14656000" />
+      <workItem from="1635434287773" duration="35000" />
+      <workItem from="1635473653167" duration="4963000" />
+      <workItem from="1635510049301" duration="7583000" />
+      <workItem from="1635518519305" duration="1651000" />
+      <workItem from="1635571307588" duration="125000" />
+      <workItem from="1635573880026" duration="1053000" />
+      <workItem from="1635574962619" duration="1165000" />
+      <workItem from="1635680548049" duration="9557000" />
+      <workItem from="1635740395693" duration="2333000" />
+      <workItem from="1635761075478" duration="14123000" />
+      <workItem from="1635849790439" duration="431000" />
+      <workItem from="1635850610079" duration="441000" />
+      <workItem from="1635851120299" duration="431000" />
+      <workItem from="1635857537588" duration="7367000" />
+      <workItem from="1635906088835" duration="4255000" />
+      <workItem from="1635933483871" duration="12958000" />
+      <workItem from="1636014641044" duration="5425000" />
+      <workItem from="1636024141674" duration="12454000" />
+      <workItem from="1636079456600" duration="4654000" />
+      <workItem from="1636116461534" duration="7730000" />
+      <workItem from="1636163064688" duration="9122000" />
+      <workItem from="1636186853890" duration="3467000" />
+      <workItem from="1636190358349" duration="83000" />
+      <workItem from="1636198237233" duration="6575000" />
+      <workItem from="1636250137870" duration="6930000" />
+      <workItem from="1636267668032" duration="7720000" />
+      <workItem from="1636369408322" duration="13110000" />
+      <workItem from="1636446761460" duration="20058000" />
+      <workItem from="1636509748081" duration="5653000" />
+      <workItem from="1636550695637" duration="5077000" />
+      <workItem from="1636597212667" duration="5240000" />
+      <workItem from="1636617912998" duration="6413000" />
+      <workItem from="1636628854955" duration="7438000" />
+      <workItem from="1636645142824" duration="1625000" />
+      <workItem from="1636683546401" duration="4960000" />
+      <workItem from="1636726993472" duration="2398000" />
+      <workItem from="1636732485820" duration="717000" />
+      <workItem from="1636765971365" duration="39000" />
+      <workItem from="1636766048271" duration="264000" />
+      <workItem from="1636766346835" duration="79000" />
+      <workItem from="1636766474393" duration="154000" />
+      <workItem from="1636766798576" duration="130000" />
+      <workItem from="1636766963285" duration="135000" />
+      <workItem from="1636767219526" duration="202000" />
+      <workItem from="1636767451071" duration="1066000" />
+      <workItem from="1636768618643" duration="93000" />
+      <workItem from="1636769382744" duration="375000" />
+      <workItem from="1636769791921" duration="126000" />
+      <workItem from="1636769957724" duration="303000" />
+      <workItem from="1636770319945" duration="356000" />
+      <workItem from="1636777591590" duration="511000" />
+      <workItem from="1636778183317" duration="159000" />
+      <workItem from="1636778539965" duration="807000" />
+      <workItem from="1636789711888" duration="96000" />
+      <workItem from="1636807894239" duration="339000" />
+      <workItem from="1636811487237" duration="2562000" />
+      <workItem from="1637074962046" duration="3448000" />
+      <workItem from="1637115430779" duration="5548000" />
+      <workItem from="1637137707311" duration="497000" />
+      <workItem from="1637162438055" duration="80000" />
+      <workItem from="1637226806885" duration="1735000" />
+      <workItem from="1637284278760" duration="12000" />
+      <workItem from="1637337793469" duration="2094000" />
+      <workItem from="1637369779143" duration="5870000" />
+      <workItem from="1637382618467" duration="944000" />
+      <workItem from="1637384385470" duration="2380000" />
+      <workItem from="1637463286422" duration="123000" />
+      <workItem from="1637672734167" duration="135000" />
+      <workItem from="1637814532570" duration="449000" />
+      <workItem from="1637825557965" duration="6000" />
+      <workItem from="1637982017501" duration="1202000" />
+      <workItem from="1638194759781" duration="1490000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="cn.hutool.core.io.IORuntimeException" package="cn.hutool.core.io" />
+          <option name="timeStamp" value="5" />
+        </breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/web/servlet/cancelUserReserveServlet.java</url>
+          <line>30</line>
+          <option name="timeStamp" value="7" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/web/servlet/areaManageServlet.java</url>
+          <line>31</line>
+          <option name="timeStamp" value="8" />
+        </line-breakpoint>
+      </breakpoints>
+      <breakpoints-dialog>
+        <breakpoints-dialog>
+          <selected-grouping-rules>
+            <grouping-rule id="XBreakpointGroupingByPackageRule" />
+          </selected-grouping-rules>
+        </breakpoints-dialog>
+      </breakpoints-dialog>
+    </breakpoint-manager>
+    <watches-manager>
+      <configuration name="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory">
+        <watch expression="areaShow" />
+      </configuration>
+    </watches-manager>
+  </component>
+</project>

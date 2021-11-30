@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Homepage</title>
+    <link rel="stylesheet" href="layui/css/layui.css">
+    <script src="layui/layui.js"></script>
+    <style>
+        .nav-tree-table-hover:hover {
+            background-color: rgb(0, 150, 136);
+        }
+
+        .nav-tree-table2 {
+            background-color: rgb(40, 43, 51);
+        }
+
+        .show-frame {
+            top: 50px !important;
+            /*默认.layui-layout-admin .layui-body {
+                top: 60px;
+                bottom: 44px;
+            }*/
+            overflow: hidden; /*消除浏览器最右边的滚动条*/
+        }
+    </style>
+</head>
+<body>
+<div class="layui-layout layui-layout-admin">
+    <div class="layui-header">
+        <div class="layui-logo" style="color: #86dc86" id="logoName">学生活动区域预约系统</div>
+        <!-- 头部区域（可配合layui已有的水平导航） -->
+        <ul class="layui-nav layui-layout-left">
+            <li class="layui-nav-item" id="userCenter">
+                <a href="#">个人中心</a>
+            </li>
+            <li class="layui-nav-item" lay-unselect="">
+                <a href="javascript:;"><img src="icon/hsj.ico" class="layui-nav-img"><span id="nameDisplay">我</span></a>
+                <dl class="layui-nav-child">
+                    <dd><a href="javascript:;">修改信息</a></dd>
+                    <dd><a href="javascript:location.href='userLogOffServlet';">退出登录</a></dd>
+                </dl>
+            </li>
+        </ul>
+    </div>
+
+    <div class="layui-side layui-bg-black">
+        <div class="layui-side-scroll">
+            <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+            <ul class="layui-nav layui-nav-tree">
+                <li class="layui-nav-item layui-nav-itemed">
+                    <a class="" href="javascript:;">预定活动区域</a>
+                    <dl class="layui-nav-child">
+                        <dd id="startReserve"><a href="javascript:;">开始预约</a></dd>
+                        <dd id="myReserve"><a href="javascript:;">我的预约</a></dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item">
+                    <a class="" href="javascript:;">活动区域分布图</a>
+                    <dl class="layui-nav-child">
+                        <dd id="getQuJiangImg"><a href="javascript:;">曲江校区</a></dd>
+                        <dd id="getJinHuaImg"><a href="javascript:;">金花校区</a></dd>
+                    </dl>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+
+    <!--左侧操作显示区域-->
+    <div class="layui-body">
+        <form></form><!--只是用来提交数据的-->
+        <iframe frameborder="0" scrolling="yes" style="width: 100%" src="iframe_use/blank.html" id="iframe">
+        </iframe>
+    </div>
+
+    <script>
+        window.onload = function () {
+            //注意：导航 依赖 element 模块，否则无法进行功能性操作
+            layui.use('element', function () {
+                let element = layui.element;
+                let $ = layui.$;
+                <!--对nav里面各种元素的操作-->
+                /*$("#logoName").click(function () {
+                    open("https://bilibili.com")
+                })*/
+
+                //展示主页用户姓名
+                let nameDisplay = $("#nameDisplay").html();
+                /*alert(nameDisplay);*/
+                $.ajax({
+                    url:"/race2/updateDisplayNameServlet",// 替换掉form表单中的action属性值
+                    type:"POST",//替换掉form表单中的method属性值
+
+                    // serialize()：是可以将整个表单的数据转成URL的字符串格式{注：意味着将整个表单进行了提交、不再一个参数一个参数提交了}
+                    data: {nameDisplay:nameDisplay,flag:true,id:"user"},
+                    success:function (data) {// 成功时自动调取的回调函数
+                        if(data.flag == true){
+                            /*alert("success"+data.data);*/
+                            $("#nameDisplay").html(data.data);
+                        }else if (data.flag==false){
+                            alert("fail");
+                        }else {
+                            alert("50001,服务器端哪儿写错了！！");
+                        }
+                    },
+                    error:function (data) {// 失败时自动调取的回调函数
+                        alert("id获取失败...");
+                    }
+                });
+
+                $("#userCenter").click(function () {
+                    $("#iframe").attr("src", "iframe_use/userCenter.html");
+                })
+            });
+
+            layui.use(['form', 'jquery', 'layer'], function () {
+                let $ = layui.$ //重点处
+                    , layer = layui.layer;
+
+                /*$("#logoName").click(function () {
+                    open("https://bilibili.com")
+                })*/
+                let iframe = $("#iframe");
+                let iframeheight = $(window).height();
+                console.log(iframeheight);
+                iframe.css("height", iframeheight);
+
+                $("#getQuJiangImg").click(function () {
+                    iframe.attr("src", "iframe_use/QuJiangMap.html");
+                })
+
+                $("#getJinHuaImg").click(function () {
+                    iframe.attr("src", "iframe_use/JinHuaMap.html");
+                })
+
+                $("#startReserve").click(function () {
+                    iframe.attr("src", "iframe_use/startReserve.html");
+                })
+
+                $("#myReserve").click(function () {
+                    iframe.attr("src", "iframe_use/myReserve.html");
+                })
+            })
+        }
+
+    </script>
+</div>
+</body>
+</html>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>changeEmail</title>
+
+    <link rel="stylesheet" href="css/iframe.css">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <script src="js/jquery-3.6.0.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+
+</head>
+<body>
+    <div class="container">
+        <div style="width: 700px;margin-left: 200px;margin-top: 30px">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h1 class="panel-title" style="font-family: 黑体,serif;font-size: x-large;color: rgba(0,0,0,0.8)">
+                        更改用户邮箱
+                    </h1>
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-body" >
+                       <div class="form-group">
+                           <label for="oldEmailAddress">旧邮箱</label>
+                           <input type="email" class="form-control" id="oldEmailAddress" placeholder="请输入旧邮箱地址" name="oldEmail1Address">
+                       </div>
+                       <div class="form-group">
+                           <label for="newEmailAddress">新邮箱</label>
+                           <input type="email" class="form-control" id="newEmailAddress" placeholder="请输入新邮箱地址" name="newEmailAddress">
+                       </div>
+                </div>
+
+                <div class="panel-footer"><a class="btn btn-info btn-sm" id="confirmButton">确认修改</a></div>
+            </div>
+
+            <div class="alert alert-danger" role="alert">
+                <strong>注意！</strong> 修改邮箱会使你的帐户被锁定，需重新激活，请慎重修改
+            </div>
+        </div>
+    </div>
+
+    <script>
+        window.onload = function () {
+            $("#confirmButton").click(function () {
+                let confirmChange = confirm("真的要修改吗？");
+                if (confirmChange==true){
+                    let oldEmail = $("#oldEmailAddress").val();
+                    let newEmail = $("#newEmailAddress").val();
+
+                    if (oldEmail==newEmail){
+                        alert("新老邮箱不能相同，请重新输入！");
+                        location.reload();
+                    }else {
+                        //邮箱格式正则校验
+                        var reg=/^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/
+                        if(reg.test(oldEmail)&&reg.test(newEmail)){
+                            alert("邮箱格式校验通过,正在处理,请稍后...");
+                            //todo 11.2 邮箱更改的功能弄了一半了，获取新老邮箱的val不能表单序列化。不然@会变成%40,字符转译了，这次就一个一个单独放Json里吧
+                            $.ajax({
+                                url:"/race2/changeEmailServlet",
+                                type:"POST",
+                                scriptCharset:"UTF-8",
+                                data: {id:"user",flag:true,oldEmail:oldEmail,newEmail:newEmail},
+                                success:function (data) {// 成功时自动调取的回调函数
+                                    if (data.flag==true){
+                                        alert("邮箱重设成功，请到新邮箱再次激活，您的密码依然是原密码,当前用户已自动登出！\n 新邮箱："+data.data);
+                                        top.location.href="/race2/login.html";
+                                    }else {
+                                        alert("错误："+data.errorMsg);
+                                    }
+                                },
+                                error:function (data) {// 失败时自动调取的回调函数
+                                    alert("更改失败！");
+                                }
+                            })
+                        }else{
+                            alert("邮箱格式不正确,请重新输入");
+                            location.reload();
+                        }
+                    }
+
+                }
+            })
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>adminCenter</title>
+
+    <link rel="stylesheet" href="css/iframe.css">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <script src="js/jquery-3.6.0.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div style="width: 700px;margin-left: 200px;margin-top: 30px">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h1 class="panel-title" style="font-family: 黑体,serif;font-size: x-large;color: rgba(0,0,0,0.8)">
+                        管理员信息
+                    </h1>
+                </div>
+            </div>
+            <div class="panel panel-success">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        管理员id
+                    </h3>
+                </div>
+                <div class="panel-body" id="displayAdminId">0000</div>
+            </div>
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        学号
+                    </h3>
+                </div>
+                <div class="panel-body" id="displayStudentNumber">0000000</div>
+            </div>
+            <div class="panel panel-success">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        姓名
+                    </h3>
+                </div>
+                <div class="panel-body" id="displayAdminName">未知</div>
+            </div>
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        邮箱
+                    </h3>
+                </div>
+                <div class="panel-body" id="displayAdminEmail">未知</div>
+
+                <div class="panel-footer"><a class="btn btn-info btn-sm" href="changeAdminEmail.html">修改</a></div>
+            </div>
+            <div class="panel panel-warning">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        密码
+                    </h3>
+                </div>
+                <div class="panel-body" id="displayAdminPassword">********</div>
+
+                <div class="panel-footer">
+                    <a class="btn btn-warning btn-sm" href="changeAdminPassword.html">修改</a>
+                    &nbsp;&nbsp;&nbsp;
+                    <button class="btn btn-sm btn-info" type="button" id="viewAdminPassword">
+                        查看密码
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        window.onload = function () {
+                let viewPasswordFlag = true;
+                let queryPassword=null;
+
+                let displayAdminId = $("#displayAdminId");
+                let displayStudentNumber = $("#displayStudentNumber");
+                let displayAdminName = $("#displayAdminName");
+                let displayAdminEmail = $("#displayAdminEmail");
+
+                $.ajax({
+                    url:"/race2/getUserInfoServlet",
+                    type:"POST",
+                    data: {id:"admin",flag:true},
+                    success:function (data) {// 成功时自动调取的回调函数
+                        if (data.flag==true){
+                            displayAdminId.html(data.data.adminid);
+                            displayStudentNumber.html(data.data.studentid);
+                            displayAdminName.html(data.data.adminname);
+                            displayAdminEmail.html(data.data.email);
+                            queryPassword=data.data.password;
+                        }else {
+                            alert("错误："+data.errorMsg);
+                        }
+                    },
+                    error:function (data) {// 失败时自动调取的回调函数
+                        alert("获取当前用户信息失败!");
+                    }
+                });
+
+                $("#viewAdminPassword").click(function () {
+                    let displayAdminPassword=$("#displayAdminPassword");
+                    if (viewPasswordFlag){
+                        displayAdminPassword.html(queryPassword);
+                        $("#viewAdminPassword").html("隐藏密码");
+                        //flag 变成false了
+                        viewPasswordFlag=(!viewPasswordFlag);
+                    }else {
+                        displayAdminPassword.html("*******");
+                        $("#viewAdminPassword").html("查看密码");
+                        //flag 变成true了
+                        viewPasswordFlag=(!viewPasswordFlag);
+                    }
+                })
+        }
+    </script>
+</body>
+</html>
